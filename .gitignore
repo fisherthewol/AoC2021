@@ -25,3 +25,6 @@ hs_err_pid*
 # Generated files.
 *.bin
 *.lock
+
+# Input data: https://twitter.com/ericwastl/status/1465805354214830081
+src/**/*.txt
