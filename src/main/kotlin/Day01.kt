@@ -1,4 +1,4 @@
-fun Part1(lines: List<String> ): Int {
+fun Part1(lines: List<String>): Int {
     var depthIncrease = 0
     var prevMeasure: Int
     var currentMeasure = Int.MAX_VALUE
@@ -11,7 +11,26 @@ fun Part1(lines: List<String> ): Int {
     return depthIncrease
 }
 
+fun Part2(lines: List<String>): Int {
+    var a: Int; var b = lines[0].toInt(); var c = lines[1].toInt()
+    var prevSum: Int
+    var currentSum = Int.MAX_VALUE
+    var index = 2
+    var sumIncrease = 0
+    while (index < lines.size) {
+        a = b
+        b = c
+        c = lines[index].toInt()
+        prevSum = currentSum
+        currentSum = a + b + c
+        if (currentSum > prevSum) sumIncrease++
+        index++
+    }
+    return sumIncrease
+}
+
 fun main() {
     val lines = readInput("Day01input")
     println(Part1(lines))
+    println(Part2(lines))
 }
