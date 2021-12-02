@@ -1,18 +1,17 @@
-fun Part1(lines: List<String>): Int {
+fun part1(lines: List<Int>): Int {
     var depthIncrease = 0
     var prevMeasure: Int
     var currentMeasure = Int.MAX_VALUE
     for (line in lines) {
-        if (line == "") break // If we reach empty line at end, leave.
         prevMeasure = currentMeasure // Move along one.
-        currentMeasure = line.toInt()
+        currentMeasure = line
         if (currentMeasure > prevMeasure) depthIncrease++
     }
     return depthIncrease
 }
 
-fun Part2(lines: List<String>): Int {
-    var a: Int; var b = lines[0].toInt(); var c = lines[1].toInt()
+fun part2(lines: List<Int>): Int {
+    var a: Int; var b = lines[0]; var c = lines[1]
     var prevSum: Int
     var currentSum = Int.MAX_VALUE
     var index = 2
@@ -20,7 +19,7 @@ fun Part2(lines: List<String>): Int {
     while (index < lines.size) {
         a = b
         b = c
-        c = lines[index].toInt()
+        c = lines[index]
         prevSum = currentSum
         currentSum = a + b + c
         if (currentSum > prevSum) sumIncrease++
@@ -30,7 +29,7 @@ fun Part2(lines: List<String>): Int {
 }
 
 fun main() {
-    val lines = readInput("Day01input")
-    println(Part1(lines))
-    println(Part2(lines))
+    val lines = readInput("Day01input").map { it.toInt() }
+    println("Measurements greater than previous: ${part1(lines)}.")
+    println("Sums greater than previous window: ${part2(lines)}.")
 }
