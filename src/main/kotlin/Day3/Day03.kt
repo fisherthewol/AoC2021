@@ -1,3 +1,7 @@
+package Day3
+
+import readInput
+
 fun List<String>.toCols(): List<MutableList<Char>> {
     val lineSize = this[0].length
     val cols : MutableList<MutableList<Char>> = mutableListOf()
@@ -54,7 +58,7 @@ fun lifeSupportRating(lines: List<String>): Int {
 }
 
 fun main() {
-    val lines = readInput("Day03Input")
+    val lines = readInput("Day3", "Day03Input")
     println("Power Consumption: ${binaryDiagnostics(lines)}")
     println("Life support rating: ${lifeSupportRating(lines)}")
 }

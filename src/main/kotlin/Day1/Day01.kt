@@ -1,3 +1,7 @@
+package Day1
+
+import readInput
+
 fun part1(lines: List<Int>): Int {
     var depthIncrease = 0
     var prevMeasure: Int
@@ -29,7 +33,7 @@ fun part2(lines: List<Int>): Int {
 }
 
 fun main() {
-    val lines = readInput("Day01input").map { it.toInt() }
+    val lines = readInput("Day1","Day01input").map { it.toInt() }
     println("Measurements greater than previous: ${part1(lines)}.")
     println("Sums greater than previous window: ${part2(lines)}.")
 }

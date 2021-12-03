@@ -1,3 +1,7 @@
+package Day2
+
+import readInput
+
 fun dive(commands: List<String>): Int {
     var depth = 0
     var horizontal = 0
@@ -37,7 +41,7 @@ fun aim(commands: List<String>): Int {
 }
 
 fun main() {
-    val lines = readInput("Day02Input")
+    val lines = readInput("Day2", "Day02Input")
     println("Depth * Horizontal = ${dive(lines)}")
     println("With aiming = ${aim(lines)}")
 }
