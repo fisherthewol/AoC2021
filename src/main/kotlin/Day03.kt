@@ -1,12 +1,12 @@
-fun toCols(lines: List<String>): MutableMap<Int, MutableList<Char>> {
-    val lineSize = lines[0].length;
-    var cols = mutableMapOf<Int, MutableList<Char>>()
+fun List<String>.toCols(): Map<Int, MutableList<Char>> {
+    val lineSize = this[0].length;
+    val cols = mutableMapOf<Int, MutableList<Char>>()
     for (i in 0 until lineSize) {
         cols[i] = mutableListOf()
     }
-    for (line in lines) {
+    for (line in this) {
         for (i in 0 until lineSize) {
-            var col = cols[i]
+            val col = cols[i]
             col?.add(line[i])
         }
     }
@@ -14,7 +14,7 @@ fun toCols(lines: List<String>): MutableMap<Int, MutableList<Char>> {
 }
 
 fun binaryDiagnostics(lines: List<String>): Int {
-    var cols = toCols(lines)
+    val cols = lines.toCols()
     var gamma = ""; var epsilon = ""
     for (col in cols){
         gamma += col.value.groupingBy { it }.eachCount().maxByOrNull { it.value }?.key
@@ -23,8 +23,16 @@ fun binaryDiagnostics(lines: List<String>): Int {
     return gamma.padStart(16, '0').toInt(2) * epsilon.padStart(16, '0').toInt(2)
 }
 
+fun oxygenGenRating(lines: List<String>): Int {
+
+}
+
+fun co2ScrubRating(lines: List<String>): Int {
+
+}
+
 fun lifeSupportRating(lines: List<String>): Int {
-    var cols = toCols(lines)
+    return oxygenGenRating(lines) * co2ScrubRating(lines)
 }
 
 fun main() {
