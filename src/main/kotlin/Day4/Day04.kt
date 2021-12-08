@@ -1,15 +1,19 @@
 package Day4
 import readInput
 
-
-class Point(val value: Int, val called: Boolean)
-
-class BingoBoard(BoardString: List<String>) {
-    var board: List<List<Point>> = BoardString.map { it.trim().split("  ", " ").map { Point(it.toInt(), false) } }
-}
-
 fun main() {
     val lines = readInput("Day4", "Day4Test")
-    var b = BingoBoard(lines.slice(3..6))
-    println(lines.size)
+    val boards: MutableList<BingoBoard> = mutableListOf()
+    for (line in lines.indices) {
+        if (lines[line] == "") {
+            val start = line + 1
+            for (index in start..lines.lastIndex) {
+                if (lines[index] == "") {
+                    boards.add(BingoBoard(lines.slice(start until index)))
+                    break
+                }
+            }
+        }
+    }
+    println(boards.size)
 }
