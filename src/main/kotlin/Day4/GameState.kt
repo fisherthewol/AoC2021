@@ -40,7 +40,7 @@ class GameState(lines: List<String>) {
             }
             for (board in boards) {
                 if (board.checkForWin()) {
-                    return board.score() * latest
+                    return board.score * latest
                 }
             }
         }
@@ -55,11 +55,12 @@ class GameState(lines: List<String>) {
             for (board in boards) {
                 board.playNum(play)
             }
-            for (board in boards) {
-                if (board.checkForWin()) {
+            for (b in boards.indices) {
+                if (boards[b].checkForWin()) {
+                    boards.removeAt(b)
                     wins += 1
-                    if (wins == boards.lastIndex) {
-                        return board.score() * latest
+                    if (boards.size == 1) {
+                        return boards[b].score * latest
                     }
                 }
             }

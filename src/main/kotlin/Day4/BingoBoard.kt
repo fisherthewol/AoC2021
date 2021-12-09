@@ -6,6 +6,11 @@ class BingoBoard(BoardString: List<String>) {
             Point(it.toInt(), false)
         }
     }
+    var score = board.sumOf {
+        it.sumOf {
+            it.value
+        }
+    }
 
     override fun toString(): String {
         var s = ""
@@ -19,18 +24,17 @@ class BingoBoard(BoardString: List<String>) {
     }
 
     fun checkForWin(): Boolean {
-
+        // Check rows.
         for (row in board) {
             if (row.all { it.called }) {
                 return true
             }
         }
+        // check columns
         for (index in 0 until board[0].size) {
             var total = 0
-            for (row in board) {
-                if (row[index].called) total++
-            }
-            if (total == board[0].size) {
+            board.forEach { if (it[index].called) total++ }
+            if (total == board.size) {
                 return true
             }
         }
@@ -42,24 +46,18 @@ class BingoBoard(BoardString: List<String>) {
             for (point in row) {
                 if (point.value == num) {
                     point.called = true
+                    score -= point.value
                 }
             }
         }
-    }
-
-    fun score(): Int {
-        var sum = 0
-        for (row in board) {
-            for (point in row) {
-                if (!point.called) {
-                    sum += point.value
-                }
-            }
-        }
-        return sum
     }
 
     fun resetBoard() {
         board.forEach { row -> row.forEach { it.called = false } }
+        score = board.sumOf {
+            it.sumOf {
+                it.value
+            }
+        }
     }
 }
