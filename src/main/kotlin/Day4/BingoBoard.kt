@@ -58,4 +58,8 @@ class BingoBoard(BoardString: List<String>) {
         }
         return sum
     }
+
+    fun resetBoard() {
+        board.forEach { row -> row.forEach { it.called = false } }
+    }
 }

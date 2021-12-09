@@ -27,6 +27,10 @@ class GameState(lines: List<String>) {
         }
     }
 
+    fun resetGame() {
+        boards.forEach { it.resetBoard() }
+    }
+
     fun playGame(): Int{
         var latest: Int
         for (play in plays) {
@@ -36,9 +40,27 @@ class GameState(lines: List<String>) {
             }
             for (board in boards) {
                 if (board.checkForWin()) {
-                    println("Winner:\n$board")
-                    println(board.score())
                     return board.score() * latest
+                }
+            }
+        }
+        return -1
+    }
+
+    fun findLastWinning(): Int {
+        var latest: Int
+        var wins = 0
+        for (play in plays) {
+            latest = play
+            for (board in boards) {
+                board.playNum(play)
+            }
+            for (board in boards) {
+                if (board.checkForWin()) {
+                    wins += 1
+                    if (wins == boards.lastIndex) {
+                        return board.score() * latest
+                    }
                 }
             }
         }
