@@ -48,8 +48,8 @@ class GameState(lines: List<String>) {
     }
 
     fun findLastWinning(): Int {
+        val removed = mutableListOf<BingoBoard>()
         var latest: Int
-        var wins = 0
         for (play in plays) {
             latest = play
             for (board in boards) {
@@ -57,9 +57,8 @@ class GameState(lines: List<String>) {
             }
             for (b in boards.indices) {
                 if (boards[b].checkForWin()) {
-                    boards.removeAt(b)
-                    wins += 1
-                    if (boards.size == 1) {
+                    if (boards[b] !in removed) removed.add(boards[b])
+                    if (boards.none { it !in removed }) {
                         return boards[b].score * latest
                     }
                 }

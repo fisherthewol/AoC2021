@@ -47,6 +47,7 @@ class BingoBoard(BoardString: List<String>) {
                 if (point.value == num) {
                     point.called = true
                     score -= point.value
+                    return
                 }
             }
         }
